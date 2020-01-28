@@ -1,0 +1,21 @@
+{
+  "name": "stock-explorer",
+  "version": "1.0.0",
+  "description": "Explore stock prices and trends",
+  "main": "server.js",
+  "author": "Alastair Williams",
+  "license": "MIT",
+	"scripts": {
+		"start": "node server.js",
+		"start:dev": "nodemon server.js"
+	},
+  "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "graphql": "^14.6.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
