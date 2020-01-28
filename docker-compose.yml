@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  db_server:
+    build: ./db
+  graphql_server:
+    build: ./server
+    ports:
+      - "3000:80"
+    depends_on:
+      - db
