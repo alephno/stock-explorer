@@ -43,6 +43,25 @@ const formatAPIUrl = (symbol, interval) => {
   return `https://www.alphavantage.co/query?function=${func}&symbol=${symbol}&apikey=${process.env.ALPHA_VANTAGE_API_KEY}`;
 };
 
+/**
+ * Turn format of
+ * {
+ *	timestamp {
+ *		1. field
+ *		2. field2
+ *		3. field3
+ *	 }
+ * }
+ *
+ * into {
+ *		timestamp
+ *		field1
+ *		field2
+ *		field3
+ * }
+ *
+ *
+ */
 formatAPIResponse = data => {
   const timeSeries = data["Time Series (Daily)"];
   return Object.entries(timeSeries).map(([timestamp, otherFields]) => {
