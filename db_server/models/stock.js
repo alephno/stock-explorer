@@ -6,31 +6,27 @@
  * can be constructed from that data.
  */
 
-const { Schema } = require("mongoose");
+const mongoose = require("mongoose");
 
-function StockModel(connection) {
-  const TimeSeriesSchema = new Schema({
-    timestamp: Date,
-    open: Number,
-    high: Number,
-    low: Number,
-    close: Number,
-    volume: Number
-  });
+const TimeSeriesSchema = new mongoose.Schema({
+  timestamp: Date,
+  open: Number,
+  high: Number,
+  low: Number,
+  close: Number,
+  volume: Number
+});
 
-  const StockEntrySchema = new Schema({
-    symbol: String,
-    companyName: String,
-    date: Date,
-    nEntries: { type: Number, default: 0 },
-    finalTimeData: TimeSeriesSchema,
-    entries: [TimeSeriesSchema]
-  });
+const StockEntrySchema = new mongoose.Schema({
+  symbol: String,
+  companyName: String,
+  date: Date,
+  nEntries: { type: Number, default: 0 },
+  finalTimeData: TimeSeriesSchema,
+  entries: [TimeSeriesSchema]
+});
 
-  return {
-    TimeSeries: connection.model("TimeSeries", TimeSeriesSchema),
-    StockEntry: connection.model("StockEntry", StockEntrySchema)
-  };
-}
-
-module.exports = StockModel;
+module.exports = {
+  TimeSeries: mongoose.model("TimeSeries", TimeSeriesSchema),
+  StockEntry: mongoose.model("StockEntry", StockEntrySchema)
+};

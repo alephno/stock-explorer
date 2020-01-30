@@ -1,14 +1,11 @@
-const StockModel = require("../models/stock");
+const { StockEntry } = require("../models/stock");
 
 /**
- * Provides functions for interfacing with stock models at the database
- * privided by {@link connection}.
+ * Provides functions for interfacing with the time series database.
  *
- * @typedef {Object} MongooseConnection
  * @param {MongooseConnection} connection - A mongoose connection to a database
  */
-function StockController(connection) {
-  const { StockEntry } = new StockModel(connection);
+function StockController() {
   const selectionExclusions =
     "-_id -__v -finalTimeData._id -finalTimeData.__v -entries._id -entries.__v";
 
@@ -62,12 +59,15 @@ function StockController(connection) {
       symbol,
       companyName,
       date: { $gte: startDate, $lte: endDate }
-    }).then(TradingDays => {
-      return TradingDays.reduce(
-        (entries, day) => entries.concat(day.finalTimeData),
-        []
-      );
-    });
+    })
+      .lean()
+      .select(selectionExclusions)
+      .then(TradingDays => {
+        return TradingDays.reduce(
+          (entries, day) => entries.concat(day.finalTimeData),
+          []
+        );
+      });
   }
 
   return {
