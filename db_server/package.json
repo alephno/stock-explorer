@@ -1,0 +1,21 @@
+{
+  "name": "stock_explorer_db_service",
+  "version": "1.0.0",
+  "description": "Database service for stock explorer app",
+  "main": "server.js",
+  "author": "Alastair Williams",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha --timeout 12000"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "mongoose": "^5.8.10"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.0.1",
+    "mongodb-memory-server": "^6.2.4",
+    "sinon": "^8.1.1"
+  }
+}
